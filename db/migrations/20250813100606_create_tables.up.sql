@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS sections (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    content TEXT,
+    position INTEGER DEFAULT 0
+)
+

@@ -1,0 +1,12 @@
+*.swp
+*.swo
+*.DS_Store
+*.tmp
+bin/
+*.exe
+*.out
+*.test
+tmp/
+*.db
+portfolio.db
+portfolio*

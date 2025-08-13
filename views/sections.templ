@@ -1,0 +1,59 @@
+package views
+
+import (
+    "strconv"
+    "github.com/WillNigel23/portfolio/models"
+)
+
+templ SectionsContainer(sections []models.Section) {
+    <div class="grid grid-cols-5 gap-4 sections-container">
+        <div class="col-span-5 sm:col-span-2 block flex flex-col">
+            <div class="p-4 border border-gray-500 flex items-center mb-4">
+                <p class="font-bold text-white mr-2"> > </p>
+                <input type="text" placeholder="Search..." class="search-input text-white"/>
+            </div>
+
+            <div class="p-4 border border-gray-500 overflow-y-scroll search-container">
+                if len(sections) != 0 {
+                    for i, section := range sections {
+                        @SectionItem(section, i == 0)
+                    }
+                }
+            </div>
+        </div>
+        <div class="col-span-5 sm:col-span-3 p-4 border border-gray-500 content-container overflow-y-scroll">
+            if len(sections) != 0 {
+                @SectionContent(sections[0])
+            }
+        </div>
+
+    </div>
+}
+
+templ SectionItem(section models.Section, active bool) {
+    <button
+        id={ "section-title-" + strconv.FormatInt(section.ID, 10) }
+        hx-get={ "/sections/" + strconv.FormatInt(section.ID, 10) }
+        hx-target="#section-content"
+        hx-swap="outerHTML"
+        class={ "text-white text-left hover:bg-gray-300 w-full p-1 section-item cursor-pointer w-full" +
+            func() string {
+                if active {
+                    return " bg-gray-600"
+                }
+                return ""
+            }() }
+    >
+        { section.Title }
+    </button>
+}
+
+templ SectionContent(section models.Section) {
+    <div id="section-content" class="flex flex-col w-full">
+        @templ.Raw(*section.Content)
+    </div>
+}
+
+templ SectionsIndex(sections []models.Section) {
+    @BaseLayout("Will Nigel De Jesus", SectionsContainer(sections))
+}

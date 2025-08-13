@@ -1,0 +1,22 @@
+# .air.toml
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  bin = "portfolio"
+  cmd = "go build -o ./portfolio ."
+  include_ext = ["go", "tmpl", "templ"]
+  exclude_dir = ["vendor", "tmp"]
+  delay = 1000
+
+[color]
+  main = "cyan"
+
+[log]
+  time = true
+
+[run]
+  cmd = "./portfolio"
+
+[hook]
+  prebuild = "templ generate"

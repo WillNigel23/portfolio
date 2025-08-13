@@ -1,0 +1,40 @@
+package views
+
+templ BaseLayout(title string, body templ.Component) {
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>{ title }</title>
+            <link rel="stylesheet" href="/css/main.css"/>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"/>
+            <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js"></script>
+
+            <script src="static/javascripts/activeSection.js"></script>
+            <script src="static/javascripts/searchSection.js"></script>
+        </head>
+        <body class="bg-black text-white relative">
+            <div class="absolute inset-0 grid-bg grid-fade-mask"></div>
+
+            <div class="w-screen h-screen flex justify-center items-center relative">
+                <div class="max-w-7xl w-full mx-4 bg-main rounded-lg border border-gray-800 p-6">
+                    <div class="flex items-center gap-2 pb-4 mb-4 border-b border-gray-500">
+                        <p class="text-white font-medium text-gray-300">
+                            <strong class="text-xl text-white font-bold">+</strong>
+                            willnigelcdejesus@gmail.com
+                        </p>
+
+                        <div class="flex flex-grow justify-end items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        </div>
+                    </div>
+
+                    @body
+                </div>
+            </div>
+        </body>
+    </html>
+}
