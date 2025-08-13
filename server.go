@@ -19,9 +19,13 @@ type Server struct {
 }
 
 func NewServer(db *db.Database) *Server {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
     s := Server{
         server: &http.Server{
-            Addr: ":3000",
+			Addr: ":" + port,
         },
         router: mux.NewRouter().StrictSlash(true),
     }
